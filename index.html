@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Encode/Decoder</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Text Encoder/Decoder</h2>
+      <label for="input-text">Input Text:</label>
+      <textarea id="input-text" rows="4" cols="4"></textarea>
+      <div class="button-container">
+        <button class="button" onclick="encodeText()">Encode</button>
+        <button class="button" onclick="decodeText()">Decode</button>
+        <button class="copy-button" onclick="copyText()">Copy</button>
+      </div>
+      <div class="result">
+        <label for="output-text">Output Text:</label>
+        <textarea id="output-text" rows="4" cols="4" readonly></textarea>
+      </div>
+    </div>
+
+    <script>
+      function htmlDecode(input) {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+      }
+
+      function encodeText() {
+        var inputText = document.getElementById("input-text").value;
+        var encodedText = btoa(inputText);
+        document.getElementById("output-text").value = encodedText;
+      }
+
+      function decodeText() {
+        var inputText = document.getElementById("input-text").value;
+        var decodedText = htmlDecode(inputText);
+        document.getElementById("output-text").value = decodedText;
+      }
+
+      function copyText() {
+        var outputText = document.getElementById("output-text");
+        outputText.select();
+        document.execCommand("copy");
+      }
+    </script>
+  </body>
+</html>
